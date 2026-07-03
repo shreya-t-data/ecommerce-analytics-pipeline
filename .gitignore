@@ -1,0 +1,23 @@
+# Python
+__pycache__/
+*.py[cod]
+venv/
+.venv/
+
+# Environment / secrets
+.env
+
+# IDE
+.vscode/
+.idea/
+
+# Data - never commit raw data
+data/raw/*.csv
+!data/raw/.gitkeep
+
+# Airflow
+dags/__pycache__/
+logs/
+
+# OS
+.DS_Store
