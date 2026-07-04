@@ -11,9 +11,9 @@ flowchart LR
     C -->|dbt marts models| D[(Postgres<br/>analytics schema)]
     D --> E[fct_orders]
     D --> F[dim_customers]
-    G[Apache Airflow] -.orchestrates.-> A
-    G -.orchestrates.-> C
-    G -.orchestrates.-> H[dbt tests<br/>data quality]
+    G[Apache Airflow] --> A
+    G --> C
+    G --> H[dbt tests<br/>data quality]
 ```
 
 **Pipeline flow:** Airflow triggers a Python script that loads 9 raw CSVs into a Postgres `raw` schema → dbt builds staging views (cleaned, renamed, typed) on top of `raw` → dbt builds mart tables (`fct_orders`, `dim_customers`) on top of staging → dbt tests validate primary key uniqueness, null constraints, and business logic (e.g., spend can't be negative).
