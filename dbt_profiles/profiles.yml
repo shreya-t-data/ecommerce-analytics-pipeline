@@ -1,0 +1,13 @@
+
+ecommerce_pipeline:
+  target: dev
+  outputs:
+    dev:
+      type: postgres
+      host: postgres
+      user: shreya
+      password: changeme123
+      port: 5432
+      dbname: ecommerce
+      schema: analytics
+      threads: 4

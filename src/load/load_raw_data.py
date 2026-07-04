@@ -44,9 +44,8 @@ def get_engine():
 def main():
     engine = get_engine()
 
-    with engine.connect() as conn:
+    with engine.begin() as conn:
         conn.execute(text("CREATE SCHEMA IF NOT EXISTS raw"))
-        conn.commit()
     logger.info("Ensured 'raw' schema exists.")
 
     for filename, table_name in FILE_TO_TABLE.items():
@@ -57,6 +56,9 @@ def main():
         
         df = pd.read_csv(filepath)
         df["loaded_at"] = pd.Timestamp.now("UTC")
+
+        with engine.begin() as conn:
+            conn.execute(text(f'DROP TABLE IF EXISTS raw."{table_name}" CASCADE'))
 
         df.to_sql(
             table_name,
