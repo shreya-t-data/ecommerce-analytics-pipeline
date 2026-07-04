@@ -21,3 +21,7 @@ logs/
 
 # OS
 .DS_Store
+
+dbt/ecommerce_pipeline/target/
+dbt/ecommerce_pipeline/logs/
+dbt/ecommerce_pipeline/dbt_packages/
